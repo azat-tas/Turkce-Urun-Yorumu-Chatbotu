@@ -1,0 +1,11 @@
+# Bu komut, aşağıdaki listeyi requirements.txt adlı bir dosyaya yazar.
+
+faiss-cpu 
+sentence-transformers
+datasets
+google-generativeai
+streamlit
+pandas
+numpy
+# pyngrok buraya GEREKMEZ
+# tqdm buraya GEREKMEZ (sadece Colab'daki ilerleme çubuğu içindi)
