@@ -105,6 +105,7 @@ Bu bölüm, projeyi (örneğin Google Colab gibi bir ortamda veya kendi bilgisay
 
 
 
+
     ## Kullanım Kılavuzu (Product Guide)
 
 Bu kılavuz, yayınlanan chatbot web arayüzünün nasıl kullanılacağını açıklar.
@@ -126,7 +127,8 @@ Linke tıkladığınızda basit bir sohbet arayüzü ile karşılaşacaksınız:
 4.  **Giriş Kutusu:** Sayfanın en altında "Bir ürün veya özellik hakkında soru sorun..." yazan bir metin kutusu bulunur. Sorularınızı buraya yazıp Enter'a basarak chatbot ile etkileşime geçebilirsiniz.
 5.  **Durum Mesajları:** Chatbot cevap vermeden önce "Yorumlar taranıyor ve cevap oluşturuluyor..." gibi durum mesajları görünebilir.
 
-*(İsteğe Bağlı: Buraya arayüzün basit bir ekran görüntüsünü ekleyebilirsiniz.)*
+*<img width="860" height="797" alt="image" src="https://github.com/user-attachments/assets/a7f84459-afc3-4e64-8559-85b8809fb90f" />
+*
 
 ### Chatbot'u Test Etme ve Yetenekleri
 
