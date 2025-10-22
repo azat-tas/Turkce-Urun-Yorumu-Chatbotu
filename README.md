@@ -50,3 +50,42 @@ Geliştirilen RAG chatbot'u, kullanılan 20.000 ürün yorumu kapsamında çeşi
 Chatbot'un çalışan web arayüzüne aşağıdaki linkten erişebilirsiniz:
 
 **https://huggingface.co/spaces/MuhammetAzat/Urun-Yorum-Chatbotu-M**
+
+
+## Çalıştırma Kılavuzu
+
+Bu bölüm, projeyi (örneğin Google Colab gibi bir ortamda veya kendi bilgisayarınızda) çalıştırmak için izlenmesi gereken adımları özetlemektedir.
+
+### Gereksinimler
+
+* Python (3.9+)
+* Git (Büyük dosyaları indirmek için Git LFS de gerekebilir)
+* Google API Anahtarı ([Google AI Studio](https://ai.google.dev/) üzerinden alınabilir)
+
+### Adımlar
+
+1.  **Projeyi Klonlama:**
+    Terminal veya komut istemcisini kullanarak projeyi bilgisayarınıza indirin:
+    ```bash
+    git clone [https://github.com/azat-tas/Turkce-Urun-Yorumu-Chatbotu.git](https://github.com/azat-tas/Turkce-Urun-Yorumu-Chatbotu.git)
+    cd Turkce-Urun-Yorumu-Chatbotu
+    ```
+
+2.  **Kütüphaneleri Yükleme:**
+    Gerekli Python kütüphanelerini yüklemek için aşağıdaki komutu çalıştırın:
+    ```bash
+    pip install -r requirements.txt
+    ```
+    *(Not: Bu komut, `requirements.txt` dosyasında listelenen tüm kütüphaneleri kuracaktır.)*
+
+3.  **Google API Anahtarını Ayarlama:**
+    Uygulamanın Google Gemini modelini kullanabilmesi için API anahtarınızı ayarlamanız gerekir. Uygulama (`app.py`), anahtarı `GOOGLE_API_KEY_STREAMLIT` adlı bir ortam değişkeninden okur.
+    * **Colab Kullanımı:** Sol menüdeki Anahtar (🔑) simgesine tıklayın. `GOOGLE_API_KEY` adıyla yeni bir "Secret" oluşturun, anahtarınızı yapıştırın ve "Notebook access" iznini açın. Uygulama başlatma kodu bu Secret'ı okuyacaktır.
+    * **Yerel Kullanım:** Uygulamayı çalıştırmadan önce terminalinizde anahtarınızı ortam değişkeni olarak ayarlayın (işletim sisteminize uygun komutu kullanın, örn. Mac/Linux: `export GOOGLE_API_KEY_STREAMLIT='YOUR_API_KEY'`).
+
+4.  **Uygulamayı Başlatma:**
+    Kurulum tamamlandıktan sonra, projenin ana klasöründeyken aşağıdaki komutu çalıştırın:
+    ```bash
+    streamlit run app.py
+    ```
+    Bu komut, chatbot arayüzünü tarayıcınızda açacaktır (genellikle `http://localhost:8501`).
