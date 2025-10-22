@@ -1,4 +1,4 @@
-# Bu komut, aşağıdaki kodun tamamını 'app.py' adlı bir dosyaya yazar.
+# Bu komut, aşağıdaki GÜNCEL kodun tamamını 'app.py' adlı bir dosyaya yazar.
 
 import streamlit as st
 import google.generativeai as genai
@@ -8,16 +8,16 @@ import pickle
 import numpy as np
 from sentence_transformers import SentenceTransformer
 # Secrets yerine Ortam Değişkeni okumak için os GEREKLİ
+from google.colab import userdata 
 
-# --- ÖN YÜKLEME FONKSİYONLARI (Streamlit Cache ile hızlandırma) ---
+# --- ÖN YÜKLEME FONKSİYONLARI ---
 @st.cache_resource
 def load_api_key_and_configure_gemini():
     """Google API Anahtarını ORTAM DEĞİŞKENİNDEN yükler ve Gemini'yi yapılandırır."""
     try:
-        # Ortam Değişkeninden oku ('GOOGLE_API_KEY_STREAMLIT' ismini kullanacağız)
         api_key = os.environ.get('GOOGLE_API_KEY_STREAMLIT')
         if api_key is None:
-            st.error("HATA: Google API Anahtarı ortam değişkeninde (GOOGLE_API_KEY_STREAMLIT) bulunamadı.")
+            st.error("HATA: Google API Anahtarı ortam değişkeninde bulunamadı.")
             st.stop()
         genai.configure(api_key=api_key)
         model = genai.GenerativeModel('gemini-flash-latest')
@@ -39,7 +39,7 @@ def load_retrieval_system():
         st.success("✅ Arama sistemi başarıyla yüklendi.")
         return embedding_model, index, processed_data
     except FileNotFoundError:
-        st.error("HATA: 'vektor_indeksi.faiss' veya 'meta_veri.pkl' dosyaları bulunamadı! Lütfen bu dosyaların Colab ortamında olduğundan emin olun.")
+        st.error("HATA: 'vektor_indeksi.faiss' veya 'meta_veri.pkl' dosyaları bulunamadı!")
         st.stop()
     except Exception as e:
         st.error(f"HATA: Arama sistemi yüklenirken hata: {e}")
@@ -50,7 +50,8 @@ embedding_model = None
 index = None
 processed_data = None
 
-def retrieve_contexts(query, k=5):
+# --- k=10 arama ---
+def retrieve_contexts(query, k=10): 
     if embedding_model is None or index is None or processed_data is None:
         st.error("Arama sistemi henüz yüklenmedi.")
         return []
@@ -66,13 +67,14 @@ def retrieve_contexts(query, k=5):
 def answer_with_rag(query, generation_model_from_cache):
     relevant_contexts = retrieve_contexts(query)
     if not relevant_contexts:
-        return "Elimdeki yorumlarda bu konuyla ilgili yeterli bilgi bulamadım."
+        return "Elimdeki yorumlarda bu konuyla ilgili bilgi bulmakta zorlanıyorum."
     context_str = "\n\n---\n\n".join(relevant_contexts)
-
-    # --- PROMPT GİRİNTİLERİ DÜZELTİLDİ ---
-    prompt = f"""Sen, Türkçe ürün yorumlarına dayanarak ürünler hakkında bilgi veren ve tavsiyelerde bulunan bir asistansın.
-Sana verilen soruyu, YALNIZCA aşağıda sağlanan ürün yorumu parçalarına (Bağlam) dayanarak cevapla. Yorumlardaki genel kanıyı özetleyebilirsin.
-Eğer cevap, sağlanan bağlamda yoksa veya yorumlar yetersizse, 'Elimdeki yorumlara göre bu konuda bir şey söyleyemem.' de. Asla yorumlarda olmayan bilgileri uydurma.
+    
+    # --- Esnek Prompt Kullanılıyor ---
+    prompt = f"""Sen, Türkçe ürün yorumlarına dayanarak ürünler hakkında bilgi veren ve tavsiyelerde bulunan bir asistansın. 
+Görevin, aşağıda sağlanan ürün yorumu parçalarını (Bağlam) dikkatlice analiz etmek ve sorulan soruya en mantıklı ve genel eğilimi yansıtan cevabı oluşturmaktır.
+Eğer bağlamda sorunun cevabı doğrudan geçmiyorsa, verilen bilgileri yorumlayarak, çıkarım yaparak veya genel bir özet sunarak soruyu yanıtla.
+Cevabını her zaman kibar ve yardımcı bir tonda tut.
 
 BAĞLAM:
 {context_str}
@@ -80,11 +82,17 @@ BAĞLAM:
 SORU:
 {query}
 
-CEVAP (Sadece yorumlara göre):"""
+CEVAP:"""
     # --- ---
 
     try:
-        response = generation_model_from_cache.generate_content(prompt)
+        # --- Temperature Ayarı ---
+        response = generation_model_from_cache.generate_content(
+            prompt,
+            generation_config=genai.types.GenerationConfig(
+                temperature=0.7 
+            )
+        )
         if not response.parts:
              return "⚠️ Üretilen cevap güvenlik filtrelerine takıldı. Lütfen sorunuzu değiştirin."
         return response.text
