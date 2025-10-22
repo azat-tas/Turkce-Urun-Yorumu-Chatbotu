@@ -101,3 +101,55 @@ Bu bölüm, projeyi (örneğin Google Colab gibi bir ortamda veya kendi bilgisay
     streamlit run app.py 
     ```
     Bu komut, chatbot arayüzünü tarayıcınızda açacaktır (genellikle `http://localhost:8501`).
+
+
+
+
+    ## Kullanım Kılavuzu (Product Guide)
+
+Bu kılavuz, yayınlanan chatbot web arayüzünün nasıl kullanılacağını açıklar.
+
+### Erişim
+
+Chatbot'a aşağıdaki Hugging Face Space linki üzerinden erişilebilir:
+
+**https://huggingface.co/spaces/MuhammetAzat/Urun-Yorum-Chatbotu-M**
+
+
+### Arayüz Açıklaması
+
+Linke tıkladığınızda basit bir sohbet arayüzü ile karşılaşacaksınız:
+
+1.  **Başlık:** "📦 Türkçe Ürün Yorum Chatbot'u".
+2.  **Alt Başlık:** Kullanılan veri seti ve modeller hakkında kısa bilgi.
+3.  **Sohbet Alanı:** Daha önceki konuşmalarınız (varsa) burada görüntülenir.
+4.  **Giriş Kutusu:** Sayfanın en altında "Bir ürün veya özellik hakkında soru sorun..." yazan bir metin kutusu bulunur. Sorularınızı buraya yazıp Enter'a basarak chatbot ile etkileşime geçebilirsiniz.
+5.  **Durum Mesajları:** Chatbot cevap vermeden önce "Yorumlar taranıyor ve cevap oluşturuluyor..." gibi durum mesajları görünebilir.
+
+*(İsteğe Bağlı: Buraya arayüzün basit bir ekran görüntüsünü ekleyebilirsiniz.)*
+
+### Chatbot'u Test Etme ve Yetenekleri
+
+Chatbot, kendisine öğretilen 20.000 Türkçe ürün yorumuna dayanarak soruları yanıtlamaya çalışır. Aşağıdaki türde sorular sorarak yeteneklerini test edebilirsiniz:
+
+* **Genel Ürün Kategorisi Hakkında:**
+    * `Kablosuz kulaklıklar hakkında genel olarak ne düşünülüyor?`
+    * `Akıllı saatlerin avantajları ve dezavantajları nelerdir?`
+* **Belirli Bir Özellik Hakkında:**
+    * `Telefonların kamera kalitesi hakkında yorumlarda neler söyleniyor?`
+    * `Laptopların pil ömrü nasıl genelde?`
+* **Kullanım Amacına Yönelik Tavsiye:**
+    * `Oyun oynamak için klavye arıyorum, yorumlarda önerilen var mı?`
+    * `Sessiz çalışan bir mouse önerir misin?`
+* **Olumlu/Olumsuz Yönler:**
+    * `Robot süpürgelerin en çok şikayet edilen özellikleri neler?`
+    * `Monitör alırken nelere dikkat etmek gerektiği yorumlarda geçiyor mu?`
+* **Marka/Model (Popülerse):**
+    * `X marka (popüler bir marka) telefonlar hakkında yorumlar nasıl?`
+    * `Y modeli (bilinen bir model) hakkında olumsuz yorum var mı?`
+
+**Beklenen Davranış:**
+
+* Chatbot, cevabını veri setindeki yorumlara dayandırmaya çalışacaktır.
+* Eğer sorulan konuyla ilgili yeterli veya alakalı yorum bulamazsa, "Elimdeki yorumlara göre bu konuda bir şey söyleyemem." veya benzeri bir yanıt verecektir. Bu, chatbot'un halüsinasyon üretmediğini gösterir.
+* Cevaplar, Gemini modelinin yorumlama yeteneğine göre değişiklik gösterebilir.
