@@ -1,6 +1,6 @@
 # Türkçe Ürün Yorumlarına Dayalı RAG Chatbotu
 
-Retrieval Augmented Generation (RAG) tekniği kullanarak Türkçe ürün yorumlarına dayalı soruları yanıtlayan ve tavsiyelerde bulunan bir chatbot .
+Retrieval Augmented Generation (RAG) tekniği kullanarak Türkçe ürün yorumlarına dayalı soruları yanıtlayan ve tavsiyelerde bulunan bir chatbot.
 
 ## Projenin Amacı
 
