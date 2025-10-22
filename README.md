@@ -59,33 +59,45 @@ Bu bölüm, projeyi (örneğin Google Colab gibi bir ortamda veya kendi bilgisay
 ### Gereksinimler
 
 * Python (3.9+)
-* Git (Büyük dosyaları indirmek için Git LFS de gerekebilir)
+* Git (Proje dosyalarını indirmek için)
 * Google API Anahtarı ([Google AI Studio](https://ai.google.dev/) üzerinden alınabilir)
 
 ### Adımlar
 
-1.  **Projeyi Klonlama:**
-    Terminal veya komut istemcisini kullanarak projeyi bilgisayarınıza indirin:
+1.  **Projeyi Klonlama (Neden Gerekli?):**
+    Projenin çalışması için gereken tüm kod (`app.py`), bağımlılık listesi (`requirements.txt`) ve veri dosyaları (`.faiss`, `.pkl`) GitHub üzerinde barındırılmaktadır. Bu dosyaları kendi çalışma ortamınıza (bilgisayarınıza veya Colab'a) indirmenin standart yolu `git clone` komutunu kullanmaktır.
     ```bash
     git clone [https://github.com/azat-tas/Turkce-Urun-Yorumu-Chatbotu.git](https://github.com/azat-tas/Turkce-Urun-Yorumu-Chatbotu.git)
-    cd Turkce-Urun-Yorumu-Chatbotu
+    cd Turkce-Urun-Yorumu-Chatbotu 
     ```
+    *(Not: `vektor_indeksi.faiss` gibi büyük dosyaların doğru indirilmesi için sisteminizde Git LFS'in kurulu olması gerekebilir: `git lfs install`)*
 
-2.  **Kütüphaneleri Yükleme:**
-    Gerekli Python kütüphanelerini yüklemek için aşağıdaki komutu çalıştırın:
+2.  **(Önerilen) Sanal Ortam Oluşturma:**
+    Projenin kütüphane bağımlılıklarının sisteminizdeki diğer projelerle çakışmasını önlemek için bir sanal ortam (virtual environment) oluşturup etkinleştirmeniz **şiddetle tavsiye edilir**. Proje klasörünün içindeyken:
     ```bash
-    pip install -r requirements.txt
+    # Sanal ortamı oluştur (venv adıyla)
+    python -m venv venv 
+    # Sanal ortamı etkinleştir
+    # Windows:
+    venv\Scripts\activate
+    # Mac/Linux:
+    source venv/bin/activate
     ```
-    *(Not: Bu komut, `requirements.txt` dosyasında listelenen tüm kütüphaneleri kuracaktır.)*
 
-3.  **Google API Anahtarını Ayarlama:**
+3.  **Kütüphaneleri Yükleme:**
+    Projenin ihtiyaç duyduğu tüm Python kütüphanelerini `requirements.txt` dosyasını  kullanarak otomatik olarak yükleyin:
+    ```bash
+    pip install -r requirements.txt 
+    ```
+
+4.  **Google API Anahtarını Ayarlama:**
     Uygulamanın Google Gemini modelini kullanabilmesi için API anahtarınızı ayarlamanız gerekir. Uygulama (`app.py`), anahtarı `GOOGLE_API_KEY_STREAMLIT` adlı bir ortam değişkeninden okur.
-    * **Colab Kullanımı:** Sol menüdeki Anahtar (🔑) simgesine tıklayın. `GOOGLE_API_KEY` adıyla yeni bir "Secret" oluşturun, anahtarınızı yapıştırın ve "Notebook access" iznini açın. Uygulama başlatma kodu bu Secret'ı okuyacaktır.
+    * **Colab Kullanımı:** Sol menüdeki Anahtar (🔑) simgesine tıklayın. `GOOGLE_API_KEY` adıyla yeni bir "Secret" oluşturun, anahtarınızı yapıştırın ve "Notebook access" iznini açın. (Uygulamayı başlatan kod bu Secret'ı okuyacaktır).
     * **Yerel Kullanım:** Uygulamayı çalıştırmadan önce terminalinizde anahtarınızı ortam değişkeni olarak ayarlayın (işletim sisteminize uygun komutu kullanın, örn. Mac/Linux: `export GOOGLE_API_KEY_STREAMLIT='YOUR_API_KEY'`).
 
-4.  **Uygulamayı Başlatma:**
-    Kurulum tamamlandıktan sonra, projenin ana klasöründeyken aşağıdaki komutu çalıştırın:
+5.  **Uygulamayı Başlatma:**
+    Kurulum tamamlandıktan sonra, projenin ana klasöründeyken aşağıdaki komutu  çalıştırın:
     ```bash
-    streamlit run app.py
+    streamlit run app.py 
     ```
     Bu komut, chatbot arayüzünü tarayıcınızda açacaktır (genellikle `http://localhost:8501`).
