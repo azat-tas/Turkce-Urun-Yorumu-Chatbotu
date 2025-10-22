@@ -1,6 +1,6 @@
 # Türkçe Ürün Yorumlarına Dayalı RAG Chatbotu
 
-Bu proje, Akbank GenAI Bootcamp: Yeni Nesil Proje Kampı kapsamında geliştirilmiştir. Amaç, Retrieval Augmented Generation (RAG) tekniği kullanarak Türkçe ürün yorumlarına dayalı soruları yanıtlayan ve tavsiyelerde bulunan bir chatbot oluşturmaktır.
+Retrieval Augmented Generation (RAG) tekniği kullanarak Türkçe ürün yorumlarına dayalı soruları yanıtlayan ve tavsiyelerde bulunan bir chatbot .
 
 ## Projenin Amacı
 
